@@ -98,6 +98,9 @@ def hasRecursion(rule: Rule):
 
 
 
+
+
+
 if __name__ == '__main__':
     rule = " A -> Ab | Bb ; B -> Ba | Ca ; C -> Cb | d"
     rules , noEnd = preProcess(rule , ";" , "->")
