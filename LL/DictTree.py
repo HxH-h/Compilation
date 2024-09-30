@@ -87,17 +87,28 @@ class DictTree:
     # 提取公共因子，获取结果并封装成Rule
     def getRet(self):
         ret = {}
-        tree.extractFactor(0, tree.root, ret)
+        self.extractFactor(0, self.root, ret)
         return [Rule(k,v) for k,v in ret.items()]
 
+# 对传入的规则集提取左公共因子
+# @param rules: list 待提取的规则集
+# rules中的每个rule左部应该唯一
+def getRet(rules: list):
+    ret = []
+    for rule in rules:
+        # 对每一个规则创建字典树
+        tree = DictTree(rule.left, rule.right)
+        ret.extend(tree.getRet())
+    return ret
 
 
 
 
 if __name__ == '__main__':
-    tree = DictTree('S',['aaB','aaaC','aaaD','cd'])
-    print(tree.getRet())
-
+    Rules = [Rule('S', ['aac', 'aaabc', 'aaad']),
+             Rule('T', ['efc', 'ec', 'd']),
+             Rule('A', ['b', 'c'])]
+    print(getRet(Rules))
 
 
 
